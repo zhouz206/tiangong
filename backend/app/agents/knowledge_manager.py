@@ -6,11 +6,21 @@
 - 知识库维护
 - 信息分类和标签
 - 知识检索和推荐
+
+集成知识库模块 (app.knowledge) 提供实际的存储和检索能力。
 """
 from typing import Any, Optional
 
 from app.core.agent import Agent, AgentCapability, TaskContext, TaskResult
 from app.core.message import MessageBus
+
+# 知识库集成
+try:
+    from app.knowledge import KnowledgeBase
+    KNOWLEDGE_MODULE_AVAILABLE = True
+except ImportError:
+    KnowledgeBase = None
+    KNOWLEDGE_MODULE_AVAILABLE = False
 
 
 class KnowledgeManagerAgent(Agent):
@@ -25,6 +35,7 @@ class KnowledgeManagerAgent(Agent):
         agent_id: str,
         name: str = "Knowledge Manager",
         message_bus: Optional[MessageBus] = None,
+        knowledge_base: Optional[KnowledgeBase] = None,
     ):
         super().__init__(
             agent_id=agent_id,
@@ -40,6 +51,9 @@ class KnowledgeManagerAgent(Agent):
         # 知识管理员特有配置
         self.temperature = 0.3  # 较低温度，分类需要一致性
         self.max_tokens = 4096
+
+        # 知识库实例（注入依赖）
+        self.knowledge_base = knowledge_base
 
     def get_system_prompt(self) -> str:
         """获取系统提示词"""
@@ -109,7 +123,7 @@ class KnowledgeManagerAgent(Agent):
                 if "document" in output:
                     documents.append(output["document"])
                 if "content" in output:
-                    documents.append({"content": output["content"]})
+                    documents.append({"content": output["content"], "title": output.get("title", "Untitled")})
 
         org_result = {
             "scope": org_scope,
@@ -118,9 +132,29 @@ class KnowledgeManagerAgent(Agent):
             "tags_assigned": [],
             "relationships_found": [],
             "gaps_identified": [],
+            "document_ids": [],
         }
 
-        # TODO: 实际实现中组织和分类文档
+        # 使用知识库模块实际组织文档
+        if self.knowledge_base and KNOWLEDGE_MODULE_AVAILABLE:
+            for doc in documents:
+                try:
+                    doc_id = self.knowledge_base.add_document(
+                        title=doc.get("title", "Untitled"),
+                        content=doc.get("content", ""),
+                        auto_categorize=True,
+                        auto_tag=True,
+                    )
+                    org_result["document_ids"].append(doc_id)
+                except Exception as e:
+                    org_result["gaps_identified"].append(f"Failed to add document: {str(e)}")
+
+            # 获取统计信息
+            stats = self.knowledge_base.get_stats()
+            org_result["total_documents"] = stats.get("count", 0)
+            org_result["categories"] = self.knowledge_base.get_categories()
+            org_result["tags"] = self.knowledge_base.get_tags()
+
         return TaskResult(
             success=True,
             output=org_result,
@@ -135,7 +169,7 @@ class KnowledgeManagerAgent(Agent):
         knowledge_items = []
         for output in context.upstream_outputs:
             if isinstance(output, dict) and "content" in output:
-                knowledge_items.append(output["content"])
+                knowledge_items.append(output)
 
         index_result = {
             "scope": index_scope,
@@ -145,7 +179,26 @@ class KnowledgeManagerAgent(Agent):
             "search_keywords": {},
         }
 
-        # TODO: 实际实现中建立索引
+        # 使用知识库模块建立索引
+        if self.knowledge_base and KNOWLEDGE_MODULE_AVAILABLE:
+            for item in knowledge_items:
+                try:
+                    doc_id = self.knowledge_base.add_document(
+                        title=item.get("title", "Untitled"),
+                        content=item.get("content", ""),
+                        category=item.get("category"),
+                        tags=item.get("tags"),
+                        auto_categorize=not item.get("category"),
+                        auto_tag=not item.get("tags"),
+                    )
+                    index_result["indexed_items"].append(doc_id)
+                except Exception as e:
+                    index_result["keywords_extracted"].append(f"Error: {str(e)}")
+
+            # 获取所有标签作为关键词
+            tags = self.knowledge_base.get_tags()
+            index_result["keywords_extracted"] = [t["name"] for t in tags[:20]]
+
         return TaskResult(
             success=True,
             output=index_result,
@@ -197,7 +250,51 @@ class KnowledgeManagerAgent(Agent):
             "suggestions": [],
         }
 
-        # TODO: 实际实现中检索知识
+        # 使用知识库模块实际检索
+        if self.knowledge_base and KNOWLEDGE_MODULE_AVAILABLE:
+            try:
+                # 执行语义搜索
+                category_filter = search_context.get("category")
+                tags_filter = search_context.get("tags")
+                limit = search_context.get("limit", 10)
+                use_hybrid = search_context.get("hybrid", False)
+
+                results = self.knowledge_base.search(
+                    query=query,
+                    category=category_filter,
+                    tags=tags_filter,
+                    limit=limit,
+                    hybrid=use_hybrid,
+                )
+
+                search_result["total_matches"] = len(results)
+                search_result["results"] = [
+                    {
+                        "id": r.document.id,
+                        "title": r.document.title,
+                        "content": r.document.content[:500] if r.document.content else "",
+                        "category": r.document.category,
+                        "tags": r.document.tags,
+                        "score": r.score,
+                        "highlights": r.highlights,
+                        "reason": r.reason,
+                    }
+                    for r in results
+                ]
+
+                # 统计涉及的分类
+                categories = set(r.document.category for r in results)
+                search_result["categories_covered"] = list(categories)
+
+                # 生成相关查询建议
+                if results:
+                    search_result["related_queries"] = [
+                        f"{query} {r.document.category}" for r in results[:3]
+                    ]
+
+            except Exception as e:
+                search_result["suggestions"] = [f"Search error: {str(e)}"]
+
         return TaskResult(
             success=True,
             output=search_result,
@@ -212,7 +309,7 @@ class KnowledgeManagerAgent(Agent):
         knowledge_pool = []
         for output in context.upstream_outputs:
             if isinstance(output, dict) and "content" in output:
-                knowledge_pool.append(output["content"])
+                knowledge_pool.append(output)
 
         curation_result = {
             "topic": curation_topic,
@@ -224,7 +321,36 @@ class KnowledgeManagerAgent(Agent):
             "outdated_items": [],
         }
 
-        # TODO: 实际实现中筛选和整理知识
+        # 使用知识库模块进行整理
+        if self.knowledge_base and KNOWLEDGE_MODULE_AVAILABLE:
+            # 检索相关知识
+            try:
+                results = self.knowledge_base.search(
+                    query=curation_topic,
+                    limit=20,
+                )
+
+                curation_result["selected_items"] = [
+                    {"id": r.document.id, "title": r.document.title, "score": r.score}
+                    for r in results[:10]
+                ]
+
+                # 按相关性评分
+                for item in curation_result["selected_items"]:
+                    curation_result["relevance_scores"][item["id"]] = item["score"]
+                    curation_result["quality_scores"][item["id"]] = min(1.0, item["score"] * 1.2)
+
+                curation_result["summary"] = f"Found {len(results)} relevant items for '{curation_topic}'"
+
+                # 识别可能过时的内容（低分结果）
+                curation_result["outdated_items"] = [
+                    {"id": r.document.id, "title": r.document.title, "score": r.score}
+                    for r in results if r.score < 0.5
+                ]
+
+            except Exception as e:
+                curation_result["recommendations"] = [f"Curation error: {str(e)}"]
+
         return TaskResult(
             success=True,
             output=curation_result,
@@ -240,6 +366,16 @@ class KnowledgeManagerAgent(Agent):
             "updates_made": [],
             "summary": "",
         }
+
+        # 使用知识库模块处理一般任务
+        if self.knowledge_base and KNOWLEDGE_MODULE_AVAILABLE:
+            try:
+                stats = self.knowledge_base.get_stats()
+                km_result["summary"] = f"Knowledge base contains {stats.get('count', 0)} documents"
+                km_result["actions_taken"] = ["Retrieved knowledge base statistics"]
+                km_result["updates_made"] = [f"Total documents: {stats.get('count', 0)}"]
+            except Exception as e:
+                km_result["actions_taken"].append(f"Error: {str(e)}")
 
         return TaskResult(
             success=True,
