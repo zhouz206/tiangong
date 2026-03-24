@@ -35,18 +35,23 @@ interface ProjectCardProps {
   progress: number;
   phase: string;
   status: string;
+  onClick?: () => void;
 }
 
-export function ProjectCard({ id, name, description, progress, phase, status }: ProjectCardProps) {
+export function ProjectCard({ name, description, progress, phase, onClick }: ProjectCardProps) {
   const phaseColors: Record<string, 'default' | 'success' | 'warning'> = {
     planning: 'default',
     executing: 'warning',
     reviewing: 'warning',
     completed: 'success'
   };
-  
+
+  const handleClick = () => {
+    if (onClick) onClick();
+  };
+
   return (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+    <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={handleClick}>
       <CardHeader>
         <CardTitle>{name}</CardTitle>
       </CardHeader>
@@ -57,8 +62,8 @@ export function ProjectCard({ id, name, description, progress, phase, status }: 
           <span className="text-sm text-gray-500">{progress}%</span>
         </div>
         <div className="mt-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-          <div 
-            className="bg-blue-600 h-2 rounded-full transition-all" 
+          <div
+            className="bg-blue-600 h-2 rounded-full transition-all"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
@@ -75,12 +80,12 @@ interface AgentCardProps {
 }
 
 export function AgentCard({ role, name, status, description }: AgentCardProps) {
-  const statusColors = {
+  const statusColors: Record<string, 'default' | 'success' | 'error'> = {
     idle: 'default',
     working: 'success',
     blocked: 'error'
   };
-  
+
   return (
     <Card>
       <CardHeader>

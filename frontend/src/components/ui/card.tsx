@@ -3,11 +3,19 @@ import React from 'react';
 interface CardProps {
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
-export function Card({ children, className = '' }: CardProps) {
+export function Card({ children, className = '', onClick }: CardProps) {
+  const handleClick = () => {
+    if (onClick) onClick();
+  };
+
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md ${className}`}>
+    <div
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md ${className}`}
+      onClick={onClick ? handleClick : undefined}
+    >
       {children}
     </div>
   );
