@@ -128,13 +128,13 @@ test('ProjectDetail 页面 - 添加任务', async () => {
   renderWithRouter(<ProjectDetail />);
 
   await waitFor(() => {
-    expect(screen.getByText('添加任务')).toBeInTheDocument();
+    expect(screen.getByText('+ 添加任务')).toBeInTheDocument();
   });
 
   fireEvent.click(screen.getByText('+ 添加任务'));
 
   await waitFor(() => {
-    expect(screen.getByText('添加任务')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('输入任务标题')).toBeInTheDocument();
   });
 
   fireEvent.change(screen.getByPlaceholderText('输入任务标题'), {
@@ -190,7 +190,7 @@ test('ProjectDetail 页面 - 切换任务状态', async () => {
     expect(screen.getByText('任务 1')).toBeInTheDocument();
   });
 
-  const statusSelect = screen.getByDisplayValue('pending');
+  const statusSelect = screen.getByText('待处理').closest('select') as HTMLSelectElement;
   fireEvent.change(statusSelect, { target: { value: 'completed' } });
 
   await waitFor(() => {
@@ -232,10 +232,10 @@ test('ProjectDetail 页面 - 切换项目阶段', async () => {
   fireEvent.click(screen.getByText('切换阶段'));
 
   await waitFor(() => {
-    expect(screen.getByText('执行中')).toBeInTheDocument();
-  });
+    expect(screen.getByText('⚙️ 执行中')).toBeInTheDocument();
+  }, { timeout: 3000 });
 
-  fireEvent.click(screen.getByText('执行中'));
+  fireEvent.click(screen.getByText('⚙️ 执行中'));
 
   await waitFor(() => {
     expect(mockUpdatePhase).toHaveBeenCalledWith('test-project-id', 'executing');

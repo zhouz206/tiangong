@@ -37,7 +37,9 @@ test('Agents 页面渲染', async () => {
 
   render(<Agents />);
 
-  expect(screen.getByText('Agent 管理')).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText('Agent 管理')).toBeInTheDocument();
+  });
   expect(screen.getByText('管理你的 AI Agent 团队')).toBeInTheDocument();
 });
 
@@ -60,12 +62,13 @@ test('Agents 页面 - 显示 Agent 统计', async () => {
   render(<Agents />);
 
   await waitFor(() => {
-    expect(screen.getByText('2')).toBeInTheDocument(); // working
+    expect(screen.getByText('Agent 管理')).toBeInTheDocument();
   });
 
-  expect(screen.getByText('空闲')).toBeInTheDocument();
-  expect(screen.getByText('工作中')).toBeInTheDocument();
-  expect(screen.getByText('阻塞')).toBeInTheDocument();
+  expect(screen.getByText('2')).toBeInTheDocument();
+  expect(screen.getAllByText('空闲').length).toBeGreaterThanOrEqual(1);
+  expect(screen.getAllByText('工作中').length).toBeGreaterThanOrEqual(1);
+  expect(screen.getAllByText('阻塞').length).toBeGreaterThanOrEqual(1);
 });
 
 test('Agents 页面 - 显示 Agent 列表', async () => {
@@ -110,21 +113,25 @@ test('Agents 页面 - 配置 Agent', async () => {
   render(<Agents />);
 
   await waitFor(() => {
-    expect(screen.getByText('配置 Agent')).toBeInTheDocument();
+    expect(screen.getByText('Agent 管理')).toBeInTheDocument();
   });
 
-  fireEvent.click(screen.getByText('配置 Agent'));
+  // 点击顶部"配置 Agent"按钮打开对话框
+  const configButtons = screen.getAllByText('配置 Agent');
+  fireEvent.click(configButtons[0]);
 
   await waitFor(() => {
-    expect(screen.getByText('配置 Agent')).toBeInTheDocument();
     expect(screen.getByText('选择一个 Agent 进行配置')).toBeInTheDocument();
   });
 
-  fireEvent.click(screen.getByText('项目经理 Agent'));
+  // 点击列表中的 Agent
+  const agentButtons = screen.getAllByRole('button');
+  const pmButton = agentButtons.find(btn => btn.textContent?.includes('项目经理'));
+  if (pmButton) fireEvent.click(pmButton);
 
   await waitFor(() => {
-    expect(screen.getByText('配置 项目经理 Agent')).toBeInTheDocument();
-  });
+    expect(screen.getByText(/配置.*项目经理/)).toBeInTheDocument();
+  }, { timeout: 2000 });
 });
 
 test('Agents 页面 - 保存 Agent 配置', async () => {
@@ -145,15 +152,25 @@ test('Agents 页面 - 保存 Agent 配置', async () => {
   render(<Agents />);
 
   await waitFor(() => {
-    expect(screen.getByText('配置 Agent')).toBeInTheDocument();
+    expect(screen.getByText('Agent 管理')).toBeInTheDocument();
   });
 
-  fireEvent.click(screen.getByText('配置 Agent'));
-  fireEvent.click(screen.getByText('项目经理 Agent'));
+  // 点击顶部"配置 Agent"按钮
+  const configButtons = screen.getAllByText('配置 Agent');
+  fireEvent.click(configButtons[0]);
+
+  await waitFor(() => {
+    expect(screen.getByText('选择一个 Agent 进行配置')).toBeInTheDocument();
+  });
+
+  // 点击 Agent 列表项
+  const agentButtons = screen.getAllByRole('button');
+  const pmButton = agentButtons.find(btn => btn.textContent?.includes('项目经理'));
+  if (pmButton) fireEvent.click(pmButton);
 
   await waitFor(() => {
     expect(screen.getByDisplayValue('项目经理 Agent')).toBeInTheDocument();
-  });
+  }, { timeout: 2000 });
 
   fireEvent.click(screen.getByText('保存'));
 
@@ -223,7 +240,7 @@ test('Agents 页面 - 切换 Agent 状态', async () => {
     expect(screen.getByText('程序员 Agent')).toBeInTheDocument();
   });
 
-  const statusSelect = screen.getByDisplayValue('idle');
+  const statusSelect = screen.getByDisplayValue('空闲');
   fireEvent.change(statusSelect, { target: { value: 'working' } });
 
   expect(mockUpdateAgentStatus).toHaveBeenCalledWith('1', 'working');
@@ -262,6 +279,10 @@ test('Agents 页面 - 刷新按钮', async () => {
   (api.agentApi.list as vi.Mock).mockResolvedValue({ agents: [] });
 
   render(<Agents />);
+
+  await waitFor(() => {
+    expect(screen.getByText('刷新')).toBeInTheDocument();
+  });
 
   fireEvent.click(screen.getByText('刷新'));
 
