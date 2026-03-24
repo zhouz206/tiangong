@@ -1,0 +1,52 @@
+# 千问百炼 (Qwen) 模型配置
+models:
+  - id: qwen-max
+    name: "Qwen-Max"
+    provider: "alibaba"
+    model_name: "qwen-max"
+    context_limit: 32768  # tokens
+    max_input_chars: 258048  # 字符限制
+    safe_threshold: 250000   # 安全阈值
+    chunk_overlap: 1000      # 分块重叠字符数
+    cost_per_token: 0.00008
+    
+  - id: qwen-plus  
+    name: "Qwen-Plus"
+    provider: "alibaba"
+    model_name: "qwen-plus"
+    context_limit: 131072    # tokens
+    max_input_chars: 258048  # 字符限制  
+    safe_threshold: 250000   # 安全阈值
+    chunk_overlap: 1000      # 分块重叠字符数
+    cost_per_token: 0.00004
+    
+  - id: qwen-turbo
+    name: "Qwen-Turbo"
+    provider: "alibaba" 
+    model_name: "qwen-turbo"
+    context_limit: 32768     # tokens
+    max_input_chars: 258048  # 字符限制
+    safe_threshold: 250000   # 安全阈值
+    chunk_overlap: 1000      # 分块重叠字符数
+    cost_per_token: 0.00002
+
+# 自动分块策略配置
+chunking_strategy:
+  enabled: true
+  auto_detect: true
+  safe_threshold: 250000
+  chunk_overlap: 1000
+  min_chunk_size: 10000
+  smart_splitting: true
+  split_priorities:
+    - section_headers    # ###, ##, # 等标题
+    - paragraph_breaks   # 段落分隔
+    - sentence_endings   # 句子结尾
+    - character_count    # 字符计数（最后手段）
+
+# 路由配置
+routing:
+  default_model: qwen-plus
+  fallback_models: [qwen-turbo, qwen-max]
+  large_input_model: qwen-plus  # 大输入优先使用 plus 版本
+  cost_optimization: true
