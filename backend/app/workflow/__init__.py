@@ -1,12 +1,10 @@
 """
-Workflow — 工作流引擎
+自动工作流编排
 """
-from .workflow import Workflow, WorkflowEngine
-from .phase import ProjectPhase, PhaseTransition
+from .engine import WorkflowEngine
+from .quality_gate import QualityGate
 
 __all__ = [
-    "Workflow",
     "WorkflowEngine",
-    "ProjectPhase",
-    "PhaseTransition",
+    "QualityGate",
 ]
