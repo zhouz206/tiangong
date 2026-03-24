@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useSettingsStore } from './stores/settings'
 import './index.css'
 
 // 页面组件（占位符）
@@ -29,6 +30,20 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/agents" element={<Agents />} />
+          <Route path="/knowledge" element={<Knowledge />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  )
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+         <Route path="/agents" element={<Agents />} />
           <Route path="/knowledge" element={<Knowledge />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

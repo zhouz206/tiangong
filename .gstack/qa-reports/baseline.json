@@ -1,0 +1,20 @@
+{
+  "date": "2026-03-24",
+  "url": "http://localhost:3000",
+  "healthScore": 85,
+  "issues": [
+    { "id": "ISSUE-001", "title": "深色模式未实际生效", "severity": "medium", "category": "functional" },
+    { "id": "ISSUE-002", "title": "页面内容过少，缺少实际功能", "severity": "low", "category": "content" },
+    { "id": "ISSUE-003", "title": "导航栏缺少移动端视觉反馈", "severity": "low", "category": "ux" }
+  ],
+  "categoryScores": {
+    "console": 100,
+    "links": 100,
+    "visual": 100,
+    "functional": 70,
+    "ux": 80,
+    "performance": 100,
+    "content": 60,
+    "accessibility": 75
+  }
+}
