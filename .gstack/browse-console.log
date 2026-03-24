@@ -75,3 +75,8 @@ Visit https://react.dev/link/error-boundaries to learn more about error boundari
 [2026-03-24T15:17:11.353Z] [debug] [vite] connecting...
 [2026-03-24T15:17:11.367Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [2026-03-24T15:17:11.394Z] [debug] [vite] connected.
+[2026-03-24T15:25:13.451Z] [debug] [vite] hot updated: /src/pages/dashboard.tsx
+[2026-03-24T15:25:13.451Z] [debug] [vite] hot updated: /src/index.css
+[2026-03-24T15:25:13.616Z] [debug] [vite] connecting...
+[2026-03-24T15:25:13.641Z] [debug] [vite] connected.
+[2026-03-24T15:25:13.660Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

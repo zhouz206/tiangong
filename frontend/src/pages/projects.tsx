@@ -5,43 +5,33 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { useProjectStore } from '../stores/project';
-
-// Mock 数据
-const mockProjects = [
-  { id: '1', name: 'SaaS 应用开发', description: '构建现代化的 SaaS 应用，包括前端、后端和数据库设计', progress: 75, phase: 'executing', status: 'active' },
-  { id: '2', name: '技术博客系列', description: 'AI Agent 开发教程，共 10 篇', progress: 30, phase: 'planning', status: 'active' },
-  { id: '3', name: '数据分析平台', description: '数据可视化和分析平台', progress: 100, phase: 'completed', status: 'completed' },
-  { id: '4', name: '移动应用开发', description: 'iOS 和 Android 跨平台应用', progress: 60, phase: 'executing', status: 'active' },
-  { id: '5', name: 'API 网关', description: '微服务 API 网关开发', progress: 45, phase: 'executing', status: 'active' },
-];
+import { projectApi } from '../utils/api';
 
 export default function Projects() {
   const navigate = useNavigate();
-  const { projects, setProjects } = useProjectStore();
+  const { projects, setProjects, loading, error } = useProjectStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterPhase, setFilterPhase] = useState('all');
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   
-  // 初始化 mock 数据
   React.useEffect(() => {
-    if (projects.length === 0) {
-      setProjects(mockProjects);
-    }
+    loadProjects();
   }, []);
   
+  const loadProjects = async () => {
+    try {
+      const data = await projectApi.list();
+      setProjects(data.projects || []);
+    } catch (err) {
+      console.error('加载失败:', err);
+    }
+  };
+  
   const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesPhase = filterPhase === 'all' || project.phase === filterPhase;
     return matchesSearch && matchesPhase;
   });
-  
-  const phaseOptions = [
-    { value: 'all', label: '全部阶段' },
-    { value: 'planning', label: '规划中' },
-    { value: 'executing', label: '执行中' },
-    { value: 'reviewing', label: '审查中' },
-    { value: 'completed', label: '已完成' }
-  ];
   
   return (
     <div className="space-y-6">
@@ -51,10 +41,17 @@ export default function Projects() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">项目列表</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">管理你的所有项目</p>
         </div>
-        <Button onClick={() => navigate('/projects/new')}>
-          + 新建项目
+        <Button onClick={() => setCreateDialogOpen(true)} disabled={loading}>
+          {loading ? '加载中...' : '+ 新建项目'}
         </Button>
       </div>
+      
+      {/* 错误提示 */}
+      {error && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+          <p className="text-red-600 dark:text-red-400">{error}</p>
+        </div>
+      )}
       
       {/* 搜索和筛选 */}
       <div className="flex flex-col md:flex-row gap-4">
@@ -63,20 +60,17 @@ export default function Projects() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="flex-1"
-          icon={
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          }
         />
         <select
           value={filterPhase}
           onChange={(e) => setFilterPhase(e.target.value)}
           className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-800 dark:text-white"
         >
-          {phaseOptions.map(option => (
-            <option key={option.value} value={option.value}>{option.label}</option>
-          ))}
+          <option value="all">全部阶段</option>
+          <option value="planning">规划中</option>
+          <option value="executing">执行中</option>
+          <option value="reviewing">审查中</option>
+          <option value="completed">已完成</option>
         </select>
       </div>
       
@@ -88,25 +82,65 @@ export default function Projects() {
       </div>
       
       {/* 项目列表 */}
-      {filteredProjects.length === 0 ? (
+      {loading ? (
+        <div className="text-center py-12">加载中...</div>
+      ) : filteredProjects.length === 0 ? (
         <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-          <svg className="w-16 h-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-          </svg>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">暂无项目</p>
-          <Button className="mt-4" onClick={() => navigate('/projects/new')}>
-            创建第一个项目
-          </Button>
+          <p className="text-gray-600 dark:text-gray-400">暂无项目</p>
+          <Button className="mt-4" onClick={() => setCreateDialogOpen(true)}>创建第一个项目</Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map(project => (
-            <ProjectCard 
-              key={project.id} 
-              {...project}
-              onClick={() => navigate(`/projects/${project.id}`)}
-            />
+            <ProjectCard key={project.id} {...project} onClick={() => navigate(`/projects/${project.id}`)} />
           ))}
+        </div>
+      )}
+      
+      {/* 新建项目对话框 */}
+      {createDialogOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-xl font-bold mb-4">新建项目</h2>
+            <form onSubmit={async (e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              try {
+                const newProject = await projectApi.create({
+                  name: formData.get('name'),
+                  description: formData.get('description'),
+                  template: formData.get('template')
+                });
+                setProjects([...projects, newProject]);
+                setCreateDialogOpen(false);
+                navigate(`/projects/${newProject.id}`);
+              } catch (err) {
+                alert('创建失败：' + err.message);
+              }
+            }}>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">项目名称</label>
+                  <input name="name" required className="w-full px-3 py-2 border rounded-md dark:bg-gray-700" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">描述</label>
+                  <textarea name="description" className="w-full px-3 py-2 border rounded-md dark:bg-gray-700" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">模板</label>
+                  <select name="template" className="w-full px-3 py-2 border rounded-md dark:bg-gray-700">
+                    <option value="software">软件开发</option>
+                    <option value="content">内容创作</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex gap-2 mt-6">
+                <Button type="button" variant="outline" onClick={() => setCreateDialogOpen(false)} className="flex-1">取消</Button>
+                <Button type="submit" className="flex-1">创建</Button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
