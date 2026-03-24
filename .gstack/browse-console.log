@@ -19,3 +19,59 @@
 [2026-03-24T15:09:51.317Z] [debug] [vite] connecting...
 [2026-03-24T15:09:51.318Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [2026-03-24T15:09:51.341Z] [debug] [vite] connected.
+[2026-03-24T15:11:28.435Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+[2026-03-24T15:11:28.437Z] [error] [vite] Failed to reload /src/main.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-03-24T15:11:28.458Z] [debug] [vite] hot updated: /src/main.tsx
+[2026-03-24T15:11:28.458Z] [debug] [vite] hot updated: /src/index.css
+[2026-03-24T15:13:16.145Z] [log] [vite] server connection lost. Polling for restart...
+[2026-03-24T15:13:16.149Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:13:17.218Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:13:18.251Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:13:19.492Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+[2026-03-24T15:13:19.502Z] [debug] [vite] connecting...
+[2026-03-24T15:13:19.506Z] [debug] [vite] connected.
+[2026-03-24T15:14:29.608Z] [log] [vite] server connection lost. Polling for restart...
+[2026-03-24T15:14:29.610Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:14:30.678Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:14:31.754Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:14:32.784Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:14:34.026Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+[2026-03-24T15:14:34.027Z] [debug] [vite] connecting...
+[2026-03-24T15:14:34.030Z] [debug] [vite] connected.
+[2026-03-24T15:15:12.360Z] [log] [vite] server connection lost. Polling for restart...
+[2026-03-24T15:15:12.360Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:13.426Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:14.502Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:15.555Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:16.606Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:17.620Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:18.680Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:19.752Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:20.805Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:21.877Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:22.899Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:23.948Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-24T15:15:25.189Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+[2026-03-24T15:15:25.190Z] [debug] [vite] connecting...
+[2026-03-24T15:15:25.192Z] [debug] [vite] connected.
+[2026-03-24T15:17:10.943Z] [debug] [vite] connecting...
+[2026-03-24T15:17:10.944Z] [debug] [vite] connected.
+[2026-03-24T15:17:11.249Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-24T15:17:11.254Z] [error] Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[2026-03-24T15:17:11.255Z] [error] Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[2026-03-24T15:17:11.258Z] [warning] %s
+
+%s
+ An error occurred in the <App> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+[2026-03-24T15:17:11.353Z] [debug] [vite] connecting...
+[2026-03-24T15:17:11.367Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-24T15:17:11.394Z] [debug] [vite] connected.

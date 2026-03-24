@@ -4,35 +4,58 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useSettingsStore } from './stores/settings'
 import './index.css'
 
-// 页面组件（占位符）
-function Dashboard() { return <div className="p-4"><h1 className="text-2xl font-bold">仪表盘</h1><p className="mt-2">项目概览和统计</p></div> }
-function Projects() { return <div className="p-4"><h1 className="text-2xl font-bold">项目列表</h1><p className="mt-2">创建和管理项目</p></div> }
-function ProjectDetail() { return <div className="p-4"><h1 className="text-2xl font-bold">项目详情</h1><p className="mt-2">任务流和 Agent 状态</p></div> }
-function Agents() { return <div className="p-4"><h1 className="text-2xl font-bold">Agent</h1><p className="mt-2">8 个 Agent 角色</p></div> }
-function Knowledge() { return <div className="p-4"><h1 className="text-2xl font-bold">知识库</h1><p className="mt-2">文档浏览和搜索</p></div> }
-function Settings() { return <div className="p-4"><h1 className="text-2xl font-bold">设置</h1><p className="mt-2">主题、API、模型配置</p></div> }
+// 导入真实页面组件
+import Dashboard from './pages/dashboard'
+import Projects from './pages/projects'
+import ProjectDetail from './pages/project-detail'
+import Agents from './pages/agents'
+import Knowledge from './pages/knowledge'
+import Settings from './pages/settings'
 
 function App() {
+  const { theme } = useSettingsStore()
+  
+  // 同步主题到 HTML 元素
+  useEffect(() => {
+    const root = document.documentElement
+    root.classList.remove('light', 'dark')
+    if (theme === 'system') {
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      root.classList.add(systemDark ? 'dark' : 'light')
+    } else {
+      root.classList.add(theme)
+    }
+  }, [theme])
+  
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-background">
-        <nav className="border-b p-4">
-          <div className="flex gap-4">
-            <a href="/" className="hover:underline">仪表盘</a>
-            <a href="/projects" className="hover:underline">项目</a>
-            <a href="/agents" className="hover:underline">Agent</a>
-            <a href="/knowledge" className="hover:underline">知识库</a>
-            <a href="/settings" className="hover:underline">设置</a>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">天工 TianGong</h1>
+              </div>
+              <div className="flex items-center space-x-4">
+                <a href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">仪表盘</a>
+                <a href="/projects" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">项目</a>
+                <a href="/agents" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Agent</a>
+                <a href="/knowledge" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">知识库</a>
+                <a href="/settings" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">设置</a>
+              </div>
+            </div>
           </div>
         </nav>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          <Route path="/agents" element={<Agents />} />
-          <Route path="/knowledge" element={<Knowledge />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="/agents" element={<Agents />} />
+            <Route path="/knowledge" element={<Knowledge />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </main>
       </div>
     </BrowserRouter>
   )
@@ -41,19 +64,5 @@ function App() {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-)
-         <Route path="/agents" element={<Agents />} />
-          <Route path="/knowledge" element={<Knowledge />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  )
-}
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
