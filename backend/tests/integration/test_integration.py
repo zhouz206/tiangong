@@ -78,7 +78,7 @@ class TestBackendAPI:
 
         # 获取项目详情
         project_id = created["id"]
-        response = client.get(f"/api/projects/projects/{project_id}")
+        response = client.get(f"/api/projects/{project_id}")
         assert response.status_code == 200
         fetched = response.json()
         assert fetched["id"] == project_id
@@ -87,7 +87,7 @@ class TestBackendAPI:
     def test_agents_endpoint(self, client):
         """测试 Agent 端点"""
         # 获取 Agent 列表
-        response = client.get("/api/agents/agents")
+        response = client.get("/api/agents/")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
@@ -228,26 +228,26 @@ class TestEndToEnd:
             "status": "active",
             "phase": "planning"
         }
-        response = client.post("/api/projects/projects", json=project_data)
+        response = client.post("/api/projects/", json=project_data)
         assert response.status_code == 200
         project = response.json()
         assert project["name"] == project_data["name"]
 
         # 3. 获取可用 Agent
-        response = client.get("/api/agents/agents")
+        response = client.get("/api/agents/")
         assert response.status_code == 200
         agents = response.json()
         assert len(agents) > 0
 
         # 4. 搜索相关知识
         search_data = {"query": "代码", "limit": 5}
-        response = client.post("/api/knowledge/knowledge/search", json=search_data)
+        response = client.post("/api/knowledge/search", json=search_data)
         assert response.status_code == 200
         search_result = response.json()
         assert "results" in search_result
 
         # 5. 获取 MCP 工具信息
-        response = client.get("/api/mcp/mcp")
+        response = client.get("/api/mcp/")
         assert response.status_code == 200
         mcp_info = response.json()
         assert "tools" in mcp_info
@@ -255,7 +255,7 @@ class TestEndToEnd:
     def test_agent_execution_flow(self, client):
         """测试 Agent 执行流程"""
         # 1. 列出可用 Agent
-        response = client.get("/api/agents/agents")
+        response = client.get("/api/agents/")
         assert response.status_code == 200
         agents = response.json()
 
@@ -270,7 +270,7 @@ class TestEndToEnd:
             if agent_role in ["coder", "designer", "researcher"]:
                 # 执行任务
                 response = client.post(
-                    f"/api/agents/agents/{agent_role}/execute",
+                    f"/api/agents/{agent_role}/execute",
                     json={"task": task}
                 )
                 assert response.status_code == 200
