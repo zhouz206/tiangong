@@ -27,14 +27,12 @@ export default function Projects() {
       setProjects(data.projects || data || []);
     } catch (err) {
       console.error('加载项目失败:', err);
-      setError('加载失败，使用本地数据');
-      // 使用 mock 数据降级
-      if (projects.length === 0) {
-        setProjects([
-          { id: '1', name: 'SaaS 应用开发', description: '构建现代化 SaaS 应用', progress: 75, phase: 'executing', status: 'active' },
-          { id: '2', name: '技术博客系列', description: 'AI Agent 开发教程', progress: 50, phase: 'planning', status: 'active' },
-        ]);
-      }
+      setError('API 不可用，使用本地数据');
+      // 使用本地 mock 数据降级
+      setProjects([
+        { id: '1', name: 'SaaS 应用开发', description: '构建现代化 SaaS 应用', progress: 75, phase: 'executing', status: 'active' },
+        { id: '2', name: '技术博客系列', description: 'AI Agent 开发教程', progress: 50, phase: 'planning', status: 'active' },
+      ]);
     } finally {
       setLoading(false);
     }

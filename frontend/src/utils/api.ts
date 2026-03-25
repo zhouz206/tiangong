@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
-const API_BASE = '/api';
+// 开发环境使用相对路径 (通过 Vite 代理)，生产环境需要配置 API 地址
+const API_BASE = (import.meta as any).env?.VITE_API_URL || '/api';
 
 const apiClient = axios.create({
   baseURL: API_BASE,

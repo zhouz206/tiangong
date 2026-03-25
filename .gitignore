@@ -35,3 +35,4 @@ coverage/
 # gstack
 .gstack/browse.json
 .gstack/qa-reports/
+.gstack/

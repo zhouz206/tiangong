@@ -1,82 +1,88 @@
-[2026-03-24T15:08:41.671Z] [debug] [vite] connecting...
-[2026-03-24T15:08:41.723Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:08:41.732Z] [debug] [vite] connected.
-[2026-03-24T15:09:02.949Z] [debug] [vite] connecting...
-[2026-03-24T15:09:02.950Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:09:02.976Z] [debug] [vite] connected.
-[2026-03-24T15:09:15.130Z] [debug] [vite] connecting...
-[2026-03-24T15:09:15.130Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:09:15.154Z] [debug] [vite] connected.
-[2026-03-24T15:09:26.343Z] [debug] [vite] connecting...
-[2026-03-24T15:09:26.344Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:09:26.367Z] [debug] [vite] connected.
-[2026-03-24T15:09:26.466Z] [debug] [vite] connecting...
-[2026-03-24T15:09:26.466Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:09:26.488Z] [debug] [vite] connected.
-[2026-03-24T15:09:37.869Z] [debug] [vite] connecting...
-[2026-03-24T15:09:37.869Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:09:37.892Z] [debug] [vite] connected.
-[2026-03-24T15:09:51.317Z] [debug] [vite] connecting...
-[2026-03-24T15:09:51.318Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:09:51.341Z] [debug] [vite] connected.
-[2026-03-24T15:11:28.435Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
-[2026-03-24T15:11:28.437Z] [error] [vite] Failed to reload /src/main.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
-[2026-03-24T15:11:28.458Z] [debug] [vite] hot updated: /src/main.tsx
-[2026-03-24T15:11:28.458Z] [debug] [vite] hot updated: /src/index.css
-[2026-03-24T15:13:16.145Z] [log] [vite] server connection lost. Polling for restart...
-[2026-03-24T15:13:16.149Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:13:17.218Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:13:18.251Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:13:19.492Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
-[2026-03-24T15:13:19.502Z] [debug] [vite] connecting...
-[2026-03-24T15:13:19.506Z] [debug] [vite] connected.
-[2026-03-24T15:14:29.608Z] [log] [vite] server connection lost. Polling for restart...
-[2026-03-24T15:14:29.610Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:14:30.678Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:14:31.754Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:14:32.784Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:14:34.026Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
-[2026-03-24T15:14:34.027Z] [debug] [vite] connecting...
-[2026-03-24T15:14:34.030Z] [debug] [vite] connected.
-[2026-03-24T15:15:12.360Z] [log] [vite] server connection lost. Polling for restart...
-[2026-03-24T15:15:12.360Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:13.426Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:14.502Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:15.555Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:16.606Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:17.620Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:18.680Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:19.752Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:20.805Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:21.877Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:22.899Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:23.948Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-[2026-03-24T15:15:25.189Z] [error] Failed to load resource: the server responded with a status of 500 (Internal Server Error)
-[2026-03-24T15:15:25.190Z] [debug] [vite] connecting...
-[2026-03-24T15:15:25.192Z] [debug] [vite] connected.
-[2026-03-24T15:17:10.943Z] [debug] [vite] connecting...
-[2026-03-24T15:17:10.944Z] [debug] [vite] connected.
-[2026-03-24T15:17:11.249Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:17:11.254Z] [error] Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
-1. You might have mismatching versions of React and the renderer (such as React DOM)
-2. You might be breaking the Rules of Hooks
-3. You might have more than one copy of React in the same app
-See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
-[2026-03-24T15:17:11.255Z] [error] Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
-1. You might have mismatching versions of React and the renderer (such as React DOM)
-2. You might be breaking the Rules of Hooks
-3. You might have more than one copy of React in the same app
-See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
-[2026-03-24T15:17:11.258Z] [warning] %s
-
-%s
- An error occurred in the <App> component. Consider adding an error boundary to your tree to customize error handling behavior.
-Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
-[2026-03-24T15:17:11.353Z] [debug] [vite] connecting...
-[2026-03-24T15:17:11.367Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[2026-03-24T15:17:11.394Z] [debug] [vite] connected.
-[2026-03-24T15:25:13.451Z] [debug] [vite] hot updated: /src/pages/dashboard.tsx
-[2026-03-24T15:25:13.451Z] [debug] [vite] hot updated: /src/index.css
-[2026-03-24T15:25:13.616Z] [debug] [vite] connecting...
-[2026-03-24T15:25:13.641Z] [debug] [vite] connected.
-[2026-03-24T15:25:13.660Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-25T01:41:04.593Z] [debug] [vite] connecting...
+[2026-03-25T01:41:04.629Z] [debug] [vite] connected.
+[2026-03-25T01:41:04.646Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-25T01:41:04.711Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:41:04.712Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=185ba988:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:41:04.717Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:41:04.717Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=185ba988:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:41:37.807Z] [log] [vite] server connection lost. Polling for restart...
+[2026-03-25T01:41:37.808Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error during WebSocket handshake: net::ERR_CONNECTION_RESET
+[2026-03-25T01:41:38.961Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:40.112Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:41.249Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:42.391Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:43.522Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:44.682Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:45.822Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:46.967Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:48.132Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:49.274Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:50.442Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:51.637Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:52.755Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:53.998Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:55.274Z] [error] WebSocket connection to 'ws://localhost:3000/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+[2026-03-25T01:41:56.750Z] [debug] [vite] connecting...
+[2026-03-25T01:41:56.833Z] [debug] [vite] connected.
+[2026-03-25T01:41:56.958Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-25T01:41:56.981Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:41:56.981Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=bea51529:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:41:56.983Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:41:56.984Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=bea51529:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:42:04.299Z] [debug] [vite] connecting...
+[2026-03-25T01:42:04.321Z] [debug] [vite] connected.
+[2026-03-25T01:42:04.321Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-25T01:42:04.336Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:42:04.336Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=bea51529:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:42:04.338Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:42:04.338Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=bea51529:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:43:33.775Z] [debug] [vite] hot updated: /src/pages/dashboard.tsx
+[2026-03-25T01:43:33.775Z] [debug] [vite] hot updated: /src/index.css
+[2026-03-25T01:43:42.383Z] [debug] [vite] hot updated: /src/pages/projects.tsx
+[2026-03-25T01:43:42.383Z] [debug] [vite] hot updated: /src/index.css
+[2026-03-25T01:43:50.696Z] [log] [vite] server connection lost. Polling for restart...
+[2026-03-25T01:43:50.723Z] [debug] [vite] connecting...
+[2026-03-25T01:43:50.810Z] [debug] [vite] connected.
+[2026-03-25T01:43:50.842Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-03-25T01:43:50.855Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:43:50.856Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=bea51529:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:43:50.858Z] [error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[2026-03-25T01:43:50.858Z] [error] 加载项目失败: Error: {"detail":"Not Found"}
+    at http://localhost:3000/src/utils/api.ts:27:27
+    at async Axios.request (http://localhost:3000/node_modules/.vite/deps/axios.js?v=bea51529:2324:14)
+    at async Object.list (http://localhost:3000/src/utils/api.ts:33:20)
+    at async loadProjects (http://localhost:3000/src/pages/dashboard.tsx:38:20)
+[2026-03-25T01:43:53.897Z] [debug] [vite] hot updated: /src/index.css
+[2026-03-25T01:43:53.898Z] [debug] [vite] hot updated: /src/pages/projects.tsx
+[2026-03-25T01:43:53.898Z] [debug] [vite] hot updated: /src/pages/dashboard.tsx
+[2026-03-25T01:43:53.898Z] [debug] [vite] hot updated: /src/pages/agents.tsx
+[2026-03-25T01:43:53.898Z] [debug] [vite] hot updated: /src/pages/knowledge.tsx
+[2026-03-25T01:43:53.898Z] [debug] [vite] hot updated: /src/pages/project-detail.tsx
