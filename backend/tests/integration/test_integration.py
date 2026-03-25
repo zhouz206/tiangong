@@ -57,7 +57,7 @@ class TestBackendAPI:
     def test_projects_endpoint(self, client):
         """测试项目端点"""
         # 获取项目列表（初始为空）
-        response = client.get("/api/projects/projects")
+        response = client.get("/api/projects/")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
@@ -69,7 +69,7 @@ class TestBackendAPI:
             "status": "active",
             "phase": "planning"
         }
-        response = client.post("/api/projects/projects", json=project_data)
+        response = client.post("/api/projects/", json=project_data)
         assert response.status_code == 200
         created = response.json()
         assert created["name"] == project_data["name"]
@@ -95,7 +95,7 @@ class TestBackendAPI:
 
         # 获取单个 Agent 详情
         agent_id = "coder"
-        response = client.get(f"/api/agents/agents/{agent_id}")
+        response = client.get(f"/api/agents/{agent_id}")
         assert response.status_code == 200
         agent = response.json()
         assert agent["id"] == f"agent-{agent_id}"
@@ -107,7 +107,7 @@ class TestBackendAPI:
             "task": "编写一个 Python 函数",
             "context": {"language": "python"}
         }
-        response = client.post(f"/api/agents/agents/{agent_id}/execute", json=execute_data)
+        response = client.post(f"/api/agents/{agent_id}/execute", json=execute_data)
         assert response.status_code == 200
         result = response.json()
         assert result["success"] is True
@@ -116,7 +116,7 @@ class TestBackendAPI:
     def test_knowledge_endpoint(self, client):
         """测试知识库端点"""
         # 获取知识库列表
-        response = client.get("/api/knowledge/knowledge")
+        response = client.get("/api/knowledge/")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
@@ -124,7 +124,7 @@ class TestBackendAPI:
 
         # 获取单个知识库条目
         item_id = "kb-001"
-        response = client.get(f"/api/knowledge/knowledge/{item_id}")
+        response = client.get(f"/api/knowledge/{item_id}")
         assert response.status_code == 200
         item = response.json()
         assert item["id"] == item_id
@@ -136,7 +136,7 @@ class TestBackendAPI:
             "query": "项目",
             "limit": 5
         }
-        response = client.post("/api/knowledge/knowledge/search", json=search_data)
+        response = client.post("/api/knowledge/search", json=search_data)
         assert response.status_code == 200
         result = response.json()
         assert "query" in result

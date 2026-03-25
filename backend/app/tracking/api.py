@@ -9,7 +9,7 @@ from app.core.database import get_db
 from .models import ExecutionLog
 from .progress import ProgressService
 
-router = APIRouter(prefix="/api/tracking", tags=["tracking"])
+router = APIRouter(tags=["tracking"])
 
 
 @router.get("/project/{project_id}/status")
