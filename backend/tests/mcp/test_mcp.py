@@ -141,24 +141,43 @@ class TestFileSystem:
 
 class TestDatabase:
     """数据库测试"""
-    
+
     @pytest.mark.asyncio
     async def test_db_query(self):
-        """测试数据库查询"""
+        """测试数据库查询（只读）"""
+        import sqlite3
+
         with tempfile.NamedTemporaryFile(delete=False, suffix='.db') as f:
             db_path = f.name
-        
+
         try:
-            # 创建表
-            await db_query({"db_path": db_path, "query": "CREATE TABLE test (id INTEGER, name TEXT)"})
-            
-            # 插入数据
-            await db_query({"db_path": db_path, "query": "INSERT INTO test VALUES (1, '测试')"})
-            
-            # 查询
+            # 使用 sqlite3 直接创建测试数据
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            cursor.execute("CREATE TABLE test (id INTEGER, name TEXT)")
+            cursor.execute("INSERT INTO test VALUES (1, '测试')")
+            cursor.execute("INSERT INTO test VALUES (2, '数据')")
+            conn.commit()
+            conn.close()
+
+            # 测试 SELECT 查询
             result = await db_query({"db_path": db_path, "query": "SELECT * FROM test"})
             assert result["success"] is True
-            assert len(result["rows"]) >= 0  # 至少有结果（可能为空）
+            assert len(result["rows"]) == 2
+            assert result["rows"][0]["name"] == "测试"
+
+            # 测试写操作被拒绝
+            create_result = await db_query({"db_path": db_path, "query": "CREATE TABLE test2 (id INTEGER)"})
+            assert create_result["success"] is False
+            assert "只允许只读查询" in create_result["error"]
+
+            insert_result = await db_query({"db_path": db_path, "query": "INSERT INTO test VALUES (3, '新增')"})
+            assert insert_result["success"] is False
+            assert "只允许只读查询" in insert_result["error"]
+
+            delete_result = await db_query({"db_path": db_path, "query": "DELETE FROM test WHERE id = 1"})
+            assert delete_result["success"] is False
+            assert "只允许只读查询" in delete_result["error"]
         finally:
             if os.path.exists(db_path):
                 os.unlink(db_path)

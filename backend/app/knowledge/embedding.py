@@ -41,27 +41,10 @@ class EmbeddingService:
     def embed(self, text: str) -> List[float]:
         """
         生成文本嵌入
-        
+
         Args:
             text: 输入文本
-            
-        Returns:
-            嵌入向量
-        """
-        if self.model_name is None or self.model is None:
-            # 使用模拟嵌入
-            return self._mock_embed(text)
-        else:
-            embedding = self.model.encode(text, convert_to_numpy=True)
-            return embedding.tolist()
-    
-    def embed(self, text: str) -> List[float]:
-        """
-        生成文本嵌入
-        
-        Args:
-            text: 输入文本
-            
+
         Returns:
             嵌入向量
         """

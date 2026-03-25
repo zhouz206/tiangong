@@ -54,22 +54,28 @@ async def file_list(arguments: Dict) -> Dict:
 # ============ Database Service ============
 
 async def db_query(arguments: Dict) -> Dict:
-    """SQL 查询"""
+    """SQL 查询（只读）"""
     db_path = arguments.get("db_path", ":memory:")
     query = arguments.get("query")
-    
+
     if not query:
         return {"error": "query is required"}
-    
+
+    # 只读限制：禁止写操作
+    query_upper = query.strip().upper()
+    write_keywords = ["INSERT", "UPDATE", "DELETE", "DROP", "CREATE", "ALTER", "TRUNCATE", "REPLACE"]
+    for keyword in write_keywords:
+        if query_upper.startswith(keyword) or f" {keyword} " in query_upper:
+            return {"error": f"只允许只读查询，禁止使用 {keyword} 语句", "success": False}
+
     try:
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         cursor.execute(query)
         rows = cursor.fetchall()
         columns = [desc[0] for desc in cursor.description] if cursor.description else []
-        conn.commit()
         conn.close()
-        
+
         return {
             "columns": columns,
             "rows": [dict(zip(columns, row)) for row in rows],

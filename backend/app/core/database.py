@@ -3,7 +3,7 @@
 """
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, Session
 import os
 
 # 确保数据目录存在
@@ -39,6 +39,15 @@ AsyncSessionLocal = sessionmaker(
     autoflush=False
 )
 
+# 同步 Session（用于测试和同步操作）
+SyncSessionLocal = sessionmaker(
+    bind=sync_engine,
+    class_=Session,
+    expire_on_commit=False,
+    autocommit=False,
+    autoflush=False
+)
+
 # Base 类
 Base = declarative_base()
 
@@ -50,6 +59,15 @@ async def get_db():
         yield db
     finally:
         await db.close()
+
+
+def get_sync_db():
+    """获取同步数据库会话（用于测试）"""
+    db = SyncSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 def init_db():

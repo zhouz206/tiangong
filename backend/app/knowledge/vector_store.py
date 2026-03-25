@@ -9,23 +9,23 @@ from chromadb.config import Settings
 class VectorStore:
     """
     ChromaDB 向量存储
-    
+
     功能:
     - 添加文档
     - 语义搜索
     - 持久化存储
     """
-    
+
     def __init__(self, persist_directory: str = "./data/chroma", collection_name: str = "knowledge"):
         """
         初始化向量存储
-        
+
         Args:
             persist_directory: 持久化目录
             collection_name: 集合名称
         """
         self.client = chromadb.Client(Settings(
-            chroma_db_impl="duckdb+parquet",
+            is_persistent=True,
             persist_directory=persist_directory
         ))
         

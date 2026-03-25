@@ -47,13 +47,13 @@ async def health_check():
     }
 
 
-# TODO: 添加 API 路由
-# from app.api import projects, agents, knowledge, tracking, mcp
-# app.include_router(projects.router, prefix="/api/projects", tags=["projects"])
-# app.include_router(agents.router, prefix="/api/agents", tags=["agents"])
-# app.include_router(knowledge.router, prefix="/api/knowledge", tags=["knowledge"])
-# app.include_router(tracking.router, prefix="/api/tracking", tags=["tracking"])
-# app.include_router(mcp.router, prefix="/api/mcp", tags=["mcp"])
+# API 路由
+from app.api import projects, agents, knowledge, tracking, mcp
+app.include_router(projects.router, prefix="/api/projects", tags=["projects"])
+app.include_router(agents.router, prefix="/api/agents", tags=["agents"])
+app.include_router(knowledge.router, prefix="/api/knowledge", tags=["knowledge"])
+app.include_router(tracking.router, prefix="/api/tracking", tags=["tracking"])
+app.include_router(mcp.router, prefix="/api/mcp", tags=["mcp"])
 
 
 if __name__ == "__main__":
